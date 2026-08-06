@@ -1,0 +1,102 @@
+.banner{
+    height:500px;
+    background:linear-gradient(135deg,#0f172a,#1e3a8a);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+
+    color:white;
+}
+
+.bannerTexto{
+    width:70%;
+}
+
+.bannerTexto h1{
+    font-size:55px;
+    margin-bottom:20px;
+}
+
+.bannerTexto p{
+    font-size:20px;
+    line-height:1.7;
+    margin-bottom:30px;
+}
+
+.bannerTexto button{
+    padding:15px 35px;
+    font-size:18px;
+
+    border:none;
+    border-radius:8px;
+
+    background:#38bdf8;
+    color:white;
+
+    cursor:pointer;
+    transition:.3s;
+}
+
+.bannerTexto button:hover{
+    background:#0284c7;
+}
+
+.destaques{
+    max-width:1200px;
+    margin:70px auto;
+    padding:20px;
+}
+
+.destaques h2{
+    text-align:center;
+    font-size:40px;
+    margin-bottom:50px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:30px;
+}
+
+.card{
+    background:white;
+    border-radius:10px;
+    padding:30px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+}
+
+.card h3{
+    margin-bottom:15px;
+    color:#1e3a8a;
+}
+
+.card p{
+    line-height:1.7;
+    margin-bottom:25px;
+}
+
+.card button{
+    padding:10px 20px;
+
+    border:none;
+    border-radius:5px;
+
+    background:#1e3a8a;
+    color:white;
+
+    cursor:pointer;
+}
+
+.card button:hover{
+    background:#2563eb;
+}
