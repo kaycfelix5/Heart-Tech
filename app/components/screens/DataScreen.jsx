@@ -1,66 +1,52 @@
 "use client";
+
 import { useState } from "react";
 
-function BatteryIcon({ level }) {
-  const color = level > 50 ? "#55B7A8" : level > 20 ? "#F5A623" : "#E55353";
-  return (
-    <svg width="36" height="20" viewBox="0 0 36 20">
-      <rect x="1" y="3" width="30" height="14" rx="3" fill="none" stroke={color} strokeWidth="2" />
-      <rect x="31" y="7" width="4" height="6" rx="1.5" fill={color} />
-      <rect x="3" y="5" width={Math.round(level / 100 * 26)} height="10" rx="2" fill={color} />
-    </svg>
-  );
-}
-
 export default function DataScreen({ navigate }) {
-  const [emergencyState, setEmergencyState] = useState("idle"); // idle | confirm | active
+  const [emergencyState, setEmergencyState] = useState("idle");
   const battery = 84;
   const distance = 67;
 
   return (
-    <div className="flex flex-col min-h-full bg-[#F4F6F6]">
+    <div className="flex flex-col min-h-screen sm:min-h-[640px] bg-[#F4F6F6]">
       {/* Header */}
       <div className={`figma-header-bar transition-colors ${emergencyState === "active" ? "bg-[#E55353]" : ""}`}>
         <button
           id="data-back-btn"
           onClick={() => navigate("home")}
-          className="text-white hover:opacity-70 transition-opacity"
+          className="text-white hover:opacity-75 transition-opacity cursor-pointer p-1"
           aria-label="Voltar"
         >
-          <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <path d="M19 12H5M12 5l-7 7 7 7" />
           </svg>
         </button>
-        <span className="text-xl tracking-widest uppercase">Dados</span>
+        <span className="text-lg font-bold tracking-widest uppercase text-white">
+          Dados
+        </span>
         <div className="w-6" />
       </div>
 
-      <div className="flex flex-col px-5 py-5 gap-4">
-        {/* Grid de status */}
+      <div className="flex flex-col px-6 py-5 gap-3.5 flex-1 max-w-md mx-auto w-full">
+        {/* Grid 2x2 de Status */}
         <div className="grid grid-cols-2 gap-3">
           {/* Bateria */}
-          <div className="figma-card-white flex flex-col items-center gap-2 py-5">
-            <BatteryIcon level={battery} />
-            <p className="text-[#222] font-bold text-2xl">{battery}%</p>
+          <div className="figma-card-white flex flex-col items-center gap-1.5 py-4">
+            <span className="text-2xl">🔋</span>
+            <p className="text-[#222] font-bold text-xl">{battery}%</p>
             <p className="text-[#777] text-xs">Bateria</p>
           </div>
 
           {/* Distância */}
-          <div className="figma-card-white flex flex-col items-center gap-2 py-5">
-            <div className="w-10 h-10 rounded-full bg-[#E6F7F4] flex items-center justify-center">
-              <svg width="22" height="22" fill="#55B7A8" viewBox="0 0 24 24">
-                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/>
-              </svg>
-            </div>
-            <p className="text-[#222] font-bold text-2xl">{distance}m</p>
+          <div className="figma-card-white flex flex-col items-center gap-1.5 py-4">
+            <span className="text-2xl">📍</span>
+            <p className="text-[#222] font-bold text-xl">{distance}m</p>
             <p className="text-[#777] text-xs">Distância</p>
           </div>
 
           {/* GPS */}
-          <div className="figma-card-white flex flex-col items-center gap-2 py-5">
-            <div className="w-10 h-10 rounded-full bg-[#E6F7F4] flex items-center justify-center">
-              <span className="text-lg">📡</span>
-            </div>
+          <div className="figma-card-white flex flex-col items-center gap-1.5 py-4">
+            <span className="text-2xl">📡</span>
             <div className="flex items-center gap-1">
               <span className="w-2 h-2 rounded-full bg-green-500" />
               <p className="text-[#222] font-bold text-sm">Ativo</p>
@@ -68,66 +54,55 @@ export default function DataScreen({ navigate }) {
             <p className="text-[#777] text-xs">GPS NEO-6M</p>
           </div>
 
-          {/* GSM / Sinal */}
-          <div className="figma-card-white flex flex-col items-center gap-2 py-5">
-            <div className="w-10 h-10 rounded-full bg-[#E6F7F4] flex items-center justify-center">
-              <span className="text-lg">📶</span>
-            </div>
+          {/* GSM */}
+          <div className="figma-card-white flex flex-col items-center gap-1.5 py-4">
+            <span className="text-2xl">📶</span>
             <p className="text-[#222] font-bold text-sm">3 barras</p>
             <p className="text-[#777] text-xs">Sinal GSM</p>
           </div>
         </div>
 
         {/* Card da pulseira */}
-        <div className="figma-card-tint flex items-center gap-4 px-5 py-4">
-          <span className="text-3xl">⌚</span>
-          <div>
-            <p className="text-[#222] font-bold text-sm">Pulseira Heart-Tec</p>
-            <p className="text-[#555] text-xs">ESP32 • SIM800L • NEO-6M</p>
-            <p className="text-[#55B7A8] text-xs font-semibold mt-1">Online agora</p>
+        <div className="figma-card-tint flex items-center justify-between px-4 py-3">
+          <div className="flex items-center gap-3">
+            <span className="text-2xl">⌚</span>
+            <div>
+              <p className="text-[#222] font-bold text-xs">Pulseira Heart-Tec</p>
+              <p className="text-[#555] text-[11px]">ESP32 • SIM800L • NEO-6M</p>
+            </div>
           </div>
-          <div className="ml-auto flex flex-col items-center gap-1">
-            <div className="w-3 h-3 rounded-full bg-green-500 shadow-sm animate-pulse" />
-            <span className="text-[10px] text-[#555]">ao vivo</span>
-          </div>
+          <span className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse" />
         </div>
 
-        {/* EMERGÊNCIA */}
+        {/* Emergência */}
         {emergencyState === "idle" && (
           <button
-            id="data-emergency-btn"
             onClick={() => setEmergencyState("confirm")}
-            className="w-full py-6 rounded-2xl bg-[#FDE8E8] border-2 border-[#F28B8B] text-[#C0392B] font-bold text-xl flex flex-col items-center gap-1 hover:bg-[#FBDBDB] transition-colors"
+            className="w-full py-5 rounded-2xl bg-[#FDE8E8] border-2 border-[#F28B8B] text-[#C0392B] font-bold text-lg flex flex-col items-center justify-center gap-1 hover:bg-[#FBDBDB] transition-colors cursor-pointer mt-auto"
           >
-            <span className="text-4xl">🚨</span>
+            <span className="text-3xl">🚨</span>
             EMERGÊNCIA
-            <span className="text-sm font-normal text-[#999] mt-1">Toque para acionar</span>
+            <span className="text-xs font-normal text-[#888]">Toque para acionar</span>
           </button>
         )}
 
-        {/* Modal de confirmação */}
         {emergencyState === "confirm" && (
-          <div className="w-full rounded-2xl border-2 border-[#F28B8B] bg-white p-5 flex flex-col gap-4">
-            <div className="text-center">
-              <span className="text-5xl">⚠️</span>
-              <h3 className="text-[#222] font-bold text-lg mt-2">Acionar Emergência?</h3>
-              <p className="text-[#555] text-sm mt-1">
-                Deseja realmente acionar uma emergência?
-                Todos os contatos serão notificados.
-              </p>
-            </div>
-            <div className="flex gap-3">
+          <div className="w-full rounded-2xl border-2 border-[#F28B8B] bg-white p-4 flex flex-col gap-3 text-center mt-auto">
+            <span className="text-3xl">⚠️</span>
+            <h3 className="text-[#222] font-bold text-base">Acionar Emergência?</h3>
+            <p className="text-[#666] text-xs">
+              Todos os contatos cadastrados serão notificados com as coordenadas GPS.
+            </p>
+            <div className="flex gap-2.5">
               <button
-                id="emergency-cancel-btn"
                 onClick={() => setEmergencyState("idle")}
-                className="flex-1 py-3 rounded-full border-2 border-[#E5E5E5] text-[#555] font-semibold text-sm hover:bg-[#F5F5F5] transition-colors"
+                className="flex-1 py-2.5 rounded-full border border-[#D5DFDC] text-[#666] font-semibold text-xs hover:bg-gray-50 cursor-pointer"
               >
                 Cancelar
               </button>
               <button
-                id="emergency-confirm-btn"
                 onClick={() => setEmergencyState("active")}
-                className="flex-1 py-3 rounded-full bg-[#E55353] text-white font-bold text-sm hover:bg-[#C0392B] transition-colors"
+                className="flex-1 py-2.5 rounded-full bg-[#E55353] text-white font-bold text-xs hover:bg-[#C0392B] cursor-pointer"
               >
                 Confirmar
               </button>
@@ -135,18 +110,16 @@ export default function DataScreen({ navigate }) {
           </div>
         )}
 
-        {/* Estado ativo de emergência */}
         {emergencyState === "active" && (
-          <div className="w-full rounded-2xl border-2 border-[#E55353] bg-[#E55353] p-5 flex flex-col items-center gap-3">
-            <span className="text-5xl animate-pulse">🚨</span>
-            <h3 className="text-white font-bold text-xl">EMERGÊNCIA ATIVA</h3>
-            <p className="text-white/80 text-sm text-center">
+          <div className="w-full rounded-2xl bg-[#E55353] p-4 flex flex-col items-center gap-2 text-white text-center mt-auto">
+            <span className="text-3xl animate-pulse">🚨</span>
+            <h3 className="font-bold text-base">EMERGÊNCIA ATIVA</h3>
+            <p className="text-xs text-white/85">
               Coordenadas enviadas. Acompanhantes notificados.
             </p>
             <button
-              id="emergency-disarm-btn"
               onClick={() => setEmergencyState("idle")}
-              className="w-full py-3 rounded-full bg-white text-[#E55353] font-bold text-sm hover:bg-gray-100 transition-colors"
+              className="w-full py-2.5 rounded-full bg-white text-[#E55353] font-bold text-xs hover:bg-gray-100 cursor-pointer mt-1"
             >
               Desarmar Emergência
             </button>
@@ -154,9 +127,8 @@ export default function DataScreen({ navigate }) {
         )}
 
         <button
-          id="data-back-bottom-btn"
           onClick={() => navigate("home")}
-          className="w-full py-3 rounded-full border border-[#E5E5E5] bg-[#F4F6F6] text-[#555] text-sm font-medium hover:bg-[#EAEAEA] transition-colors"
+          className="w-full py-2.5 rounded-full border border-[#D5DFDC] bg-white text-[#666] text-xs font-semibold hover:bg-gray-50 transition-colors cursor-pointer"
         >
           Voltar
         </button>

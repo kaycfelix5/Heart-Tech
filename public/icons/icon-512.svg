@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#55B7A8" />
+      <stop offset="100%" stop-color="#3E9788" />
+    </linearGradient>
+    <linearGradient id="heart-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#E6F7F4" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-opacity="0.25" />
+    </filter>
+  </defs>
+
+  <!-- Background with rounded corners -->
+  <rect width="512" height="512" rx="112" fill="url(#bg-grad)" />
+
+  <!-- Inner Soft Circle -->
+  <circle cx="256" cy="256" r="200" fill="rgba(255,255,255,0.12)" />
+
+  <!-- Heartbeat ECG Pulse Line -->
+  <path
+    d="M 90 256 L 165 256 L 195 180 L 235 330 L 270 220 L 295 260 L 420 260"
+    fill="none"
+    stroke="#FFFFFF"
+    stroke-width="26"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    filter="url(#shadow)"
+  />
+
+  <!-- Badge / Heart Badge on bottom right -->
+  <g transform="translate(310, 310)" filter="url(#shadow)">
+    <rect width="110" height="110" rx="28" fill="#8DDDD0" stroke="#FFFFFF" stroke-width="7" />
+    <path
+      d="M 55 30 C 42 16, 22 28, 32 44 L 55 70 L 78 44 C 88 28, 68 16, 55 30 Z"
+      fill="#FFFFFF"
+    />
+  </g>
+</svg>

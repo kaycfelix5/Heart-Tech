@@ -124,10 +124,157 @@ body {
   flex-shrink: 0;
 }
 
-/* ── Responsividade ── */
+/* ── Responsividade & Animações ── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* ── Mobile PWA & Touch Optimizations ── */
+html, body {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  overscroll-behavior-y: contain;
+}
+
+/* Safe areas para iPhone / Android com notch */
+.pb-safe {
+  padding-bottom: max(1rem, env(safe-area-inset-bottom, 1rem));
+}
+.pt-safe {
+  padding-top: max(0.5rem, env(safe-area-inset-top, 0.5rem));
+}
+.safe-area-inset-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* ── Mobile App Bottom Navigation ── */
+.mobile-bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid rgba(226, 236, 235, 0.8);
+  padding-bottom: env(safe-area-inset-bottom, 8px);
+}
+
+/* ── Desktop Phone Frame Simulator ── */
+.device-frame-wrapper {
+  position: relative;
+  background: #1e293b;
+  border-radius: 48px;
+  padding: 12px;
+  box-shadow:
+    0 0 0 4px #334155,
+    0 25px 60px -15px rgba(0, 0, 0, 0.4),
+    0 12px 24px -10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.device-frame-screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #F4F6F6;
+  border-radius: 38px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.device-notch {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 22px;
+  background: #1e293b;
+  border-bottom-left-radius: 14px;
+  border-bottom-right-radius: 14px;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.device-camera {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #0f172a;
+  box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.2);
+}
+
+.device-speaker {
+  width: 36px;
+  height: 4px;
+  border-radius: 2px;
+  background: #334155;
+}
+
+/* ── Pulse & Slide animations ── */
+@keyframes soft-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.08); opacity: 0.85; }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-16px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideLeft {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-soft-pulse {
+  animation: soft-pulse 2s ease-in-out infinite;
+}
+.animate-slide-in {
+  animation: slideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.animate-fade-in {
+  animation: fadeIn 0.2s ease-out;
+}
+
+/* ── Dark Mode Overrides ── */
+.dark {
+  color-scheme: dark;
+}
+.dark body {
+  background-color: #090d12;
+  color: #f1f5f9;
+}
+.dark .figma-input {
+  background-color: #182230;
+  border-color: #2e3c50;
+  color: #f1f5f9;
+}
+.dark .figma-input:focus {
+  border-color: #55B7A8;
+  background-color: #121a24;
+}
+.dark .figma-card-white {
+  background-color: #111827;
+  border-color: #1f2937;
+  color: #f1f5f9;
+}
+.dark .figma-card-tint {
+  background-color: #132422;
+  border-color: #1d3d38;
+  color: #e2f5f1;
 }
